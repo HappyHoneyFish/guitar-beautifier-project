@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/record/record",
+    "pages/result/result"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "原声吉他美化",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F3F3F3"
+  },
+  "permission": {
+    "scope.camera": {
+      "desc": "需要使用您的相机来录制吉他弹奏画面"
+    },
+    "scope.record": {
+      "desc": "需要使用您的麦克风来采集吉他原声"
+    },
+    "scope.writePhotosAlbum": {
+      "desc": "需要相册权限，以便将美化后的视频保存给您发朋友圈"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

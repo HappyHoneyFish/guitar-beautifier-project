@@ -1,0 +1,67 @@
+<view class="container result-page">
+
+<view class="state-container flex-col flex-center" wx:if="{{status === 'pending' || status === 'processing'}}">
+  <view class="win-spinner"></view>
+  
+  <text class="title-large mt-20">正在施展魔法</text>
+  
+  <text class="status-msg">{{processMsg}}</text>
+  
+  <view class="time-badge mt-20" wx:if="{{estimatedTime > 0}}">
+    <text>预计还需 {{estimatedTime}} 秒</text>
+  </view>
+</view>
+
+<view class="state-container flex-col flex-center" wx:if="{{status === 'failed' || status === 'network_error'}}">
+  <icon type="warn" size="64" color="#D13438"></icon>
+  <text class="title-large mt-20">处理中止</text>
+  <text class="text-muted text-center mt-20">{{processMsg}}</text>
+  
+  <view class="control-panel w-100 mt-20">
+    <view class="fluent-btn-primary btn-block" bindtap="goBack">返回首页重试</view>
+  </view>
+</view>
+
+<view class="success-container flex-col" wx:if="{{status === 'completed'}}">
+  
+  <view class="video-stack">
+    
+    <view class="video-wrapper fluent-card">
+      <view class="video-label bg-dark">原始画面 (已静音)</view>
+      <video 
+        src="{{sourcePath}}" 
+        muted="{{true}}" 
+        autoplay="{{true}}" 
+        loop="{{true}}" 
+        object-fit="cover"
+        show-fullscreen-btn="{{false}}"
+        show-play-btn="{{false}}"
+        controls="{{false}}"
+      ></video>
+    </view>
+
+    <view class="video-wrapper fluent-card">
+      <view class="video-label bg-primary">✨ 音画美化后</view>
+      <video 
+        src="{{resultPath}}" 
+        autoplay="{{true}}" 
+        loop="{{true}}" 
+        object-fit="cover"
+        show-fullscreen-btn="{{false}}"
+      ></video>
+    </view>
+
+  </view>
+
+  <view class="control-panel">
+    <view class="fluent-btn-primary btn-block" bindtap="saveAndShare">
+      保存相册并去发朋友圈
+    </view>
+    <view class="fluent-btn-secondary btn-block mt-20" bindtap="goBack">
+      返回首页 (不保存将丢失)
+    </view>
+  </view>
+  
+</view>
+
+</view>

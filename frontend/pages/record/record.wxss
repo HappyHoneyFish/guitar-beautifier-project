@@ -1,0 +1,109 @@
+/* pages/record/record.wxss */
+
+.record-page {
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+/* 媒体容器：固定比例，防止不同手机屏幕导致的排版跳动 */
+.media-container {
+  flex: 1;
+  width: 100%;
+  padding: 0; /* 覆盖 fluent-card 的默认 padding，让相机铺满卡片 */
+  overflow: hidden;
+  position: relative;
+  background-color: #000; /* 未加载出相机时的纯黑底色 */
+  min-height: 50vh;
+}
+
+.camera-view {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 录制中的红色提示角标 */
+.recording-indicator {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(4px); /* 这里克制地用一点模糊，仅用于黑色半透明背景保证文字可读 */
+}
+
+/* 呼吸闪烁的红点 */
+.red-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #FF4444;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.recording-time {
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* 底部操作区布局 */
+.control-panel {
+  padding: 20px 0;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-large {
+  width: 200px;
+  height: 56px;
+  border-radius: 28px; /* 录制按钮特例：更圆润以符合相机直觉 */
+  font-size: 18px;
+}
+
+/* 停止按钮：红色警示色 */
+.btn-danger {
+  background-color: #D13438; /* Win11 规范的警示红 */
+  box-shadow: 0 4px 12px rgba(209, 52, 56, 0.3);
+}
+.btn-danger:active {
+  background-color: #A4262C;
+}
+
+/* 翻转镜头按钮：极简文字链风格 */
+.switch-camera-btn {
+  margin-top: 16px;
+  padding: 8px 16px;
+}
+.icon-text {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 双按钮并排布局 */
+.action-buttons {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.btn-half {
+  width: 48%; /* 留出 4% 间距 */
+  height: 50px;
+}

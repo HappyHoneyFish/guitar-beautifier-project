@@ -1,0 +1,142 @@
+/* app.wxss */
+
+/* ==========================================
+   全局样式变量 (Win11 Fluent Design 风格)
+   ========================================== */
+   page {
+    /* 核心色彩系 */
+    --primary-color: #0078D4;      /* 经典 Win11 蓝，干净、商务、专业 */
+    --primary-hover: #005A9E;      /* 按钮按下时的深蓝，交互反馈更扎实 */
+    --bg-color: #F3F3F3;           /* 页面浅灰背景，不刺眼 */
+    --card-bg: #FFFFFF;            /* 卡片纯白背景 */
+    --text-main: #1A1A1A;          /* 极高对比度主文本 */
+    --text-secondary: #5C5C5C;     /* 次要文本/辅助说明 */
+    --border-color: #E5E5E5;       /* 极浅的边框分割线，提升卡片精致感 */
+    
+    /* 结构与交互规范 */
+    --radius-sm: 4px;              /* 微圆角 (用于按钮，拒绝过度圆润可爱的药丸按钮) */
+    --radius-md: 8px;              /* 标准卡片圆角 (Win11 典型卡片曲率) */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06); /* 锐利且克制的二重阴影 */
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06); /* 浮起状态的阴影 */
+  
+    /* 字体排版：优先调用系统原生无衬线字体 */
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-size: 14px;
+    line-height: 1.5;
+    box-sizing: border-box;
+  }
+  
+  /* 全局应用 box-sizing 避免 padding 撑破布局 */
+  /* 使用小程序原生标签替代通配符 */
+  view, text, scroll-view, image, button, input {
+    box-sizing: border-box;
+  }
+  
+  /* ==========================================
+     全局通用工具类 (大厂组件化思维，提效利器)
+     ========================================== */
+  
+  /* 页面基础容器，保证底部有呼吸感 */
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 24px 20px;
+  }
+  
+  /* Fluent 风格标准卡片 */
+  .fluent-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color); /* 纯白卡片加一圈极细边框是现代 UI 的精髓 */
+    transition: box-shadow 0.2s ease;
+  }
+  
+  /* Fluent 风格主按钮 (如：开始录制、保存相册) */
+  .fluent-btn-primary {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: var(--radius-sm);
+    padding: 14px 24px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 120, 212, 0.2);
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1); /* Win11 的交互反馈极其干脆 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* 主按钮按下状态：轻微缩放+变色，模拟真实的物理按压感 */
+  .fluent-btn-primary:active {
+    background-color: var(--primary-hover);
+    transform: scale(0.98); 
+    box-shadow: none;
+  }
+  
+  /* Fluent 风格次要按钮 (如：取消、重录) */
+  .fluent-btn-secondary {
+    background-color: transparent;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 24px;
+    text-align: center;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .fluent-btn-secondary:active {
+    background-color: rgba(0, 0, 0, 0.04);
+    transform: scale(0.98);
+  }
+  
+  /* ==========================================
+     排版与布局辅助类
+     ========================================== */
+  
+  /* 大标题 */
+  .title-large {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-main);
+    letter-spacing: -0.5px; /* 稍微收紧字间距，显得更干练 */
+  }
+  
+  /* 辅助说明文字 */
+  .text-muted {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  
+  /* 布局原子类 */
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mt-20 { margin-top: 20px; }
+  .mb-20 { margin-bottom: 20px; }

@@ -1,0 +1,77 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# === Virtual Environments ===
+# 虚拟环境目录（根据你的实际情况选一个）
+backend/.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# === PyCharm / IntelliJ ===
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+out/
+
+# === Environment Variables ===
+# 绝不要提交包含密钥的 .env 文件！
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# === Database & Logs ===
+*.db
+*.sqlite
+*.sqlite3
+*.log
+logs/
+*.pid
+
+# === OS Generated Files ===
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Testing ===
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+
+# === Jupyter Notebook ===
+.ipynb_checkpoints
+
+# === MyPy ===
+.mypy_cache/
+.dmypy.json
+dmypy.json

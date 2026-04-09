@@ -1,0 +1,10 @@
+# 核心 Web 框架与服务器，针对 2核 4G 服务器精简过的核心库
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+gunicorn>=21.2.0
+
+# 处理文件上传必须的库
+python-multipart>=0.0.6
+
+# 核心音频处理引擎 (Spotify 开源，自带原生效果器，无需 VST)
+pedalboard>=0.7.7

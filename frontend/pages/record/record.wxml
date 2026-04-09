@@ -1,0 +1,61 @@
+<view class="container record-page">
+  
+  <view class="header flex-col">
+    <text class="title-large">吉他原声录制</text>
+    <text class="text-muted">请将手机放置在最佳收音与取景位置</text>
+  </view>
+
+  <view class="media-container fluent-card">
+    
+    <camera 
+      wx:if="{{!videoPath}}" 
+      device-position="{{devicePosition}}" 
+      flash="off" 
+      binderror="onCameraError" 
+      class="camera-view"
+    >
+      <view class="recording-indicator" wx:if="{{isRecording}}">
+        <view class="red-dot"></view>
+        <text class="recording-time">REC {{recordingTime}}s</text>
+      </view>
+    </camera>
+
+    <video 
+      wx:else 
+      src="{{videoPath}}" 
+      controls="{{true}}" 
+      autoplay="{{true}}" 
+      loop="{{true}}" 
+      object-fit="cover"
+      class="camera-view"
+    ></video>
+  </view>
+
+  <view class="control-panel">
+    
+    <view wx:if="{{!isRecording && !videoPath}}" class="flex-center">
+      <view class="fluent-btn-primary btn-large" bindtap="startRecord">
+        开始录制
+      </view>
+      <view class="switch-camera-btn" bindtap="switchCamera">
+        <text class="icon-text">⟲ 翻转镜头</text>
+      </view>
+    </view>
+
+    <view wx:if="{{isRecording}}" class="flex-center">
+      <view class="fluent-btn-primary btn-large btn-danger" bindtap="stopRecord">
+        ⏹ 停止录制
+      </view>
+    </view>
+
+    <view wx:if="{{videoPath}}" class="action-buttons flex-row">
+      <view class="fluent-btn-secondary btn-half" bindtap="reRecord">
+        重新录制
+      </view>
+      <view class="fluent-btn-primary btn-half" bindtap="submitBeautify">
+        ✨ 一键美化
+      </view>
+    </view>
+
+  </view>
+</view>
