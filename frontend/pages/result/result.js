@@ -38,9 +38,8 @@ Page({
     if (this.countdownTimer) clearInterval(this.countdownTimer);
   },
 
-  // ==========================================
-  // 核心流程：上传 -> 轮询 -> 下载
-  // ==========================================
+
+  // 流程：上传 -> 轮询 -> 下载
 
   async startProcess(filePath) {
     try {
@@ -72,13 +71,13 @@ Page({
       try {
         const taskData = await request.getTaskStatus(taskId);
 
-        // 容忍轻微网络波动，不立刻判死刑
+        // 容忍轻微网络波动
         if (taskData.status === 'network_error') {
            this.setData({ processMsg: taskData.message });
            return;
         }
 
-        // 实时同步后端的友好提示语 (如："正在注入大教堂混响...")
+        // 实时同步后端的友好提示语
         this.setData({ processMsg: taskData.message });
 
         if (taskData.status === 'completed') {
@@ -101,7 +100,7 @@ Page({
   async downloadResultVideo(taskId) {
     try {
       const tempFilePath = await request.downloadResult(taskId);
-      // 阶段 4：大功告成，切换页面状态到对比播放模式
+      // 阶段 4：切换页面状态到对比播放模式
       this.setData({
         status: 'completed',
         resultPath: tempFilePath
@@ -134,9 +133,8 @@ Page({
     });
   },
 
-  // ==========================================
-  // 保存与分享逻辑
-  // ==========================================
+
+  // 保存与分享
 
   saveAndShare() {
     const { resultPath } = this.data;
@@ -162,7 +160,7 @@ Page({
       fail: (err) => {
         wx.hideLoading();
         
-        // 核心排错：用户曾残忍拒绝过相册权限
+        // 用户曾残忍拒绝过相册权限
         if (err.errMsg.includes('auth deny') || err.errMsg.includes('auth denied')) {
           wx.showModal({
             title: '需要保存权限',
@@ -184,7 +182,7 @@ Page({
 
   goBack() {
     // 直接返回录像页。由于没有保存到本地存储，
-    // 页面销毁后临时视频文件会被微信静默清理，完美实现"即用即走"
+    // 页面销毁后临时视频文件会被微信静默清理，完美实现即用即走
     wx.navigateBack({
       delta: 1
     });

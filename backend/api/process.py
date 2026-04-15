@@ -5,8 +5,6 @@ import logging
 import subprocess
 from fastapi import APIRouter, UploadFile, File, BackgroundTasks, HTTPException
 from fastapi.responses import FileResponse
-
-# 引入我们刚才写好的核心模块与工具
 from core.audio_processor import process_guitar_audio
 from core.video_processor import process_video_and_merge
 from utils.file_handler import save_upload_file, generate_temp_path, cleanup_files, TEMP_WORKSPACE
@@ -16,16 +14,16 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-# ==========================================
-# 极简任务状态管理 (基于文件，适配 Gunicorn 多进程)
-# ==========================================
+
+# 任务状态管理 (基于文件，适配 Gunicorn 多进程)
+
 def update_task_status(task_id: str, status: str, message: str = "", result_file: str = ""):
     """更新任务状态到 JSON 文件"""
     status_file = os.path.join(TEMP_WORKSPACE, f"{task_id}.json")
     data = {
         "status": status,  # pending, processing, completed, failed
-        "message": message,  # 前端展示的进度提示词
-        "result_file": result_file  # 完成后的产物路径
+        "message": message,
+        "result_file": result_file
     }
     with open(status_file, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False)
@@ -40,14 +38,14 @@ def get_task_status_data(task_id: str) -> dict:
         return json.load(f)
 
 
-# ==========================================
+
 # 后台异步处理流水线
-# ==========================================
+
 def process_task_pipeline(task_id: str, input_video_path: str):
     """
     统筹音视频剥离、修音、画面美化与合并的完整流水线
     """
-    temp_files = [input_video_path]  # 记录需要被清理的垃圾文件
+    temp_files = [input_video_path]
 
     try:
         update_task_status(task_id, "processing", "正在解析视频音轨...")
@@ -55,7 +53,6 @@ def process_task_pipeline(task_id: str, input_video_path: str):
         # 1. 利用 FFmpeg 从原视频中剥离纯净的 WAV 音频
         raw_audio_path = generate_temp_path("raw_audio", ".wav")
         temp_files.append(raw_audio_path)
-        # 提取 44.1kHz, 16bit 的标准双声道 PCM 音频，供 Pedalboard 处理
         subprocess.run(
             ["ffmpeg", "-y", "-i", input_video_path, "-vn", "-acodec", "pcm_s16le", "-ar", "44100", "-ac", "2",
              raw_audio_path],
@@ -87,13 +84,12 @@ def process_task_pipeline(task_id: str, input_video_path: str):
         logger.error(f"任务 {task_id} 执行异常: {str(e)}")
         update_task_status(task_id, "failed", f"服务器开小差了: {str(e)}")
     finally:
-        # 清理过程中产生的所有输入和中间文件 (只保留输出视频)
+        # 清理过程中产生的所有输入和中间文件
         cleanup_files(temp_files)
 
 
-# ==========================================
+
 # 开放给微信小程序的 API 接口
-# ==========================================
 
 @router.post("/upload")
 async def upload_and_process(background_tasks: BackgroundTasks, file: UploadFile = File(...)):

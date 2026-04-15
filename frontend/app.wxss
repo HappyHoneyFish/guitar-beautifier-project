@@ -1,25 +1,23 @@
 /* app.wxss */
 
-/* ==========================================
-   全局样式变量 (Win11 Fluent Design 风格)
-   ========================================== */
+/* 全局样式 */
    page {
-    /* 核心色彩系 */
-    --primary-color: #0078D4;      /* 经典 Win11 蓝，干净、商务、专业 */
-    --primary-hover: #005A9E;      /* 按钮按下时的深蓝，交互反馈更扎实 */
-    --bg-color: #F3F3F3;           /* 页面浅灰背景，不刺眼 */
-    --card-bg: #FFFFFF;            /* 卡片纯白背景 */
-    --text-main: #1A1A1A;          /* 极高对比度主文本 */
-    --text-secondary: #5C5C5C;     /* 次要文本/辅助说明 */
-    --border-color: #E5E5E5;       /* 极浅的边框分割线，提升卡片精致感 */
+    /* 色系 */
+    --primary-color: #0078D4;     
+    --primary-hover: #005A9E;     
+    --bg-color: #F3F3F3;           
+    --card-bg: #FFFFFF;           
+    --text-main: #1A1A1A;          
+    --text-secondary: #5C5C5C;    
+    --border-color: #E5E5E5;       
     
     /* 结构与交互规范 */
-    --radius-sm: 4px;              /* 微圆角 (用于按钮，拒绝过度圆润可爱的药丸按钮) */
-    --radius-md: 8px;              /* 标准卡片圆角 (Win11 典型卡片曲率) */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06); /* 锐利且克制的二重阴影 */
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06); /* 浮起状态的阴影 */
+    --radius-sm: 4px;              
+    --radius-md: 8px;              
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06); 
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06); 
   
-    /* 字体排版：优先调用系统原生无衬线字体 */
+    /* 字体排版 */
     font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-main);
@@ -34,11 +32,9 @@
     box-sizing: border-box;
   }
   
-  /* ==========================================
-     全局通用工具类 (大厂组件化思维，提效利器)
-     ========================================== */
+  /* 全局通用工具 */
   
-  /* 页面基础容器，保证底部有呼吸感 */
+  /* 页面基础容器 */
   .container {
     display: flex;
     flex-direction: column;
@@ -53,7 +49,7 @@
     box-shadow: var(--shadow-sm);
     padding: 20px;
     margin-bottom: 20px;
-    border: 1px solid var(--border-color); /* 纯白卡片加一圈极细边框是现代 UI 的精髓 */
+    border: 1px solid var(--border-color); /* 纯白卡片加一圈极细边框是现代 UI 的精髓哦 */
     transition: box-shadow 0.2s ease;
   }
   
@@ -73,7 +69,7 @@
     align-items: center;
   }
   
-  /* 主按钮按下状态：轻微缩放+变色，模拟真实的物理按压感 */
+  /* 主按钮按下状态 */
   .fluent-btn-primary:active {
     background-color: var(--primary-hover);
     transform: scale(0.98); 
@@ -101,9 +97,7 @@
     transform: scale(0.98);
   }
   
-  /* ==========================================
-     排版与布局辅助类
-     ========================================== */
+  /* 排版与布局辅助类 */
   
   /* 大标题 */
   .title-large {

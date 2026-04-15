@@ -66,9 +66,9 @@ Component({
       const { windowWidth, safeArea: { top = 0, bottom = 0 } = {} } = wx.getWindowInfo() || wx.getSystemInfoSync()
       this.setData({
         ios: !isAndroid,
-        innerPaddingRight: `padding-right: ${windowWidth - rect.left}px`,
-        leftWidth: `width: ${windowWidth - rect.left}px`,
-        safeAreaTop: isDevtools || isAndroid ? `height: calc(var(--height) + ${top}px); padding-top: ${top}px` : ``
+        innerPaddingRight: `padding-right: ${windowWidth - rect.left}px;`,
+        leftWidth: `width: ${windowWidth - rect.left}px;`,
+        safeAreaTop: isDevtools || isAndroid ? `height: calc(var(--height) + ${top}px); padding-top: ${top}px;` : ``
       })
     },
   },

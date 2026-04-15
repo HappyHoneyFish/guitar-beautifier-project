@@ -1,8 +1,6 @@
 import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-# 引入我们写好的 API 路由
 from api.process import router as process_router
 from utils.file_handler import ensure_workspace
 
@@ -20,22 +18,21 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# ==========================================
+
 # 中间件配置
-# ==========================================
 # 微信小程序虽然不受传统浏览器跨域限制，
-# 但为了方便后续可能扩展的 Web 端后台管理，我们保留 CORS 配置
+# 但为了方便后续可能扩展的 Web 端后台管理，保留 CORS 配置
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 生产环境中可替换为你的具体域名
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ==========================================
+
 # 生命周期事件
-# ==========================================
+
 @app.on_event("startup")
 async def startup_event():
     """在服务器启动时执行的检查"""
@@ -46,9 +43,9 @@ async def startup_event():
 async def shutdown_event():
     logger.info("🛑 服务正在关闭...")
 
-# ==========================================
+
 # 路由注册
-# ==========================================
+
 # 将 api/process.py 中的所有接口挂载到 /api/v1 前缀下
 app.include_router(process_router, prefix="/api/v1", tags=["Video Processing"])
 

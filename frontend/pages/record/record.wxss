@@ -79,14 +79,14 @@
 
 /* 停止按钮：红色警示色 */
 .btn-danger {
-  background-color: #D13438; /* Win11 规范的警示红 */
+  background-color: #D13438; 
   box-shadow: 0 4px 12px rgba(209, 52, 56, 0.3);
 }
 .btn-danger:active {
   background-color: #A4262C;
 }
 
-/* 翻转镜头按钮：极简文字链风格 */
+/* 翻转镜头按钮 */
 .switch-camera-btn {
   margin-top: 16px;
   padding: 8px 16px;

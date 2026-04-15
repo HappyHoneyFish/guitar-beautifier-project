@@ -29,7 +29,7 @@ const request = {
         timeout: 60000, // 视频较大，给足 60 秒的上传时间
         success: (res) => {
           try {
-            // 【大坑预警】：wx.uploadFile 返回的 res.data 永远是 String，必须手动 Parse！
+            // 注意注意，wx.uploadFile 返回的 res.data 永远是 String，必须手动 Parse！
             const data = JSON.parse(res.data);
             
             if (res.statusCode === 200 && data.code === 0) {

@@ -12,7 +12,6 @@
   justify-content: center;
 }
 
-/* Win11 风格的极简加载动画：纯色、匀速、不花哨 */
 .win-spinner {
   width: 48px;
   height: 48px;
@@ -33,12 +32,12 @@
   margin-top: 12px;
 }
 
-/* 倒计时徽章 */
+/* 倒计时 */
 .time-badge {
-  background-color: #E6F2FA; /* 极浅的品牌蓝背景 */
+  background-color: #E6F2FA; 
   color: var(--primary-color);
   padding: 6px 16px;
-  border-radius: 16px; /* 药丸形状适合做 Tag */
+  border-radius: 16px; 
   font-size: 13px;
   font-weight: 600;
 }

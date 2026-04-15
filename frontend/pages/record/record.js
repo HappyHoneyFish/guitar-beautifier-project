@@ -24,7 +24,6 @@ Page({
   },
 
   onHide() {
-    // 【大厂规范：资源防泄漏】
     // 页面隐藏时（例如突然接电话、切出微信），如果是正在录制状态，必须强制停止并保存
     if (this.data.isRecording) {
       this.stopRecord();
@@ -35,14 +34,13 @@ Page({
     this.clearTimer();
   },
 
-  // ==========================================
-  // 核心录制交互逻辑
-  // ==========================================
+
+  // 录制交互逻辑
 
   startRecord() {
     if (!this.cameraCtx) return;
 
-    // 给予短暂震动反馈，提升物理按压质感 (Win11交互精髓)
+    // 给予短暂震动反馈，提升物理按压质感
     wx.vibrateShort({ type: 'medium' });
 
     this.cameraCtx.startRecord({
@@ -70,7 +68,7 @@ Page({
       success: (res) => {
         this.setData({
           isRecording: false,
-          videoPath: res.tempVideoPath // 拿到宝贵的原视频本地路径
+          videoPath: res.tempVideoPath 
         });
       },
       fail: (err) => {
@@ -95,9 +93,9 @@ Page({
     });
   },
 
-  // ==========================================
-  // 核心跳转逻辑 (将原始文件交给处理页)
-  // ==========================================
+
+  // 跳转逻辑 (将原始文件交给处理页)
+
   submitBeautify() {
     const { videoPath } = this.data;
     if (!videoPath) {
@@ -109,15 +107,14 @@ Page({
     const encodedPath = encodeURIComponent(videoPath);
     
     // 跳转至结果页，并将原视频路径带过去。
-    // 我们不在录制页做上传网络请求，遵循“单一职责原则”，让页面职责更清晰
+    // 我们不在录制页做上传网络请求，遵循单一职责原则，让页面职责更清晰
     wx.navigateTo({
       url: `/pages/result/result?sourcePath=${encodedPath}`,
     });
   },
 
-  // ==========================================
+
   // 辅助与状态管理
-  // ==========================================
 
   switchCamera() {
     // 录制过程中禁止翻转镜头，防止底层进程崩溃
@@ -146,7 +143,7 @@ Page({
         recordingTime: this.data.recordingTime + 1
       });
       
-      // 微信小程序单次录制通常有最大限制，这里主动设定 60 秒兜底机制
+      // 微信小程序单次录制通常有最大限制，这里设定 60 秒兜底机制
       if (this.data.recordingTime >= 60) {
         this.stopRecord();
         wx.showToast({ title: '已达到最大录制时长', icon: 'none' });

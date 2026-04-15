@@ -16,9 +16,9 @@ def process_video_and_merge(input_video: str, processed_audio: str, output_video
 
     logger.info(f"🎬 开始处理视频并合并音频: {output_video}")
 
-    # =====================================================================
+
     # FFmpeg 滤镜参数设计 (针对手机自拍/后置录制吉他场景)
-    # =====================================================================
+
 
     # 1. hqdn3d (高质量 3D 降噪):
     # 这里我们把空间平滑参数调高一点(luma_spatial=5, chroma_spatial=5)，

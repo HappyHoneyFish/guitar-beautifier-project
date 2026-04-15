@@ -15,21 +15,21 @@ logger = logging.getLogger(__name__)
 
 def process_guitar_audio(input_file: str, output_file: str) -> bool:
     """
-    核心算法：吉他音频修音（纯原生组件实现，无 VST 依赖）
-    模拟【小振膜话筒】+【大教堂混响】
+    核心算法：吉他音频修音
+    模拟小振膜话筒+大教堂混响
     """
     if not os.path.exists(input_file):
         logger.error(f"❌ 找不到输入音频: {input_file}")
         return False
 
     try:
-        logger.info(f"🎸 开始处理音频，应用大师级 EQ 与空间参数: {input_file}")
+        logger.info(f"🎸 开始处理音频，应用EQ与空间参数: {input_file}")
 
         # 构建原生效果器链条
         board = Pedalboard([
-            # ==========================================
-            # A. 精准 EQ 整形 (完美替代 TDR Nova)
-            # ==========================================
+
+            # A. 精准 EQ 整形
+
             # 1. 严格切除 60Hz 以下的所有无用低频噪音
             HighpassFilter(cutoff_frequency_hz=60.0),
 
@@ -42,13 +42,13 @@ def process_guitar_audio(input_file: str, output_file: str) -> bool:
             # 4. 模拟小振膜的“通透感与空气感”（拨弦的泛音）
             PeakFilter(cutoff_frequency_hz=7500.0, gain_db=6.5, q=0.5),
 
-            # ==========================================
+
             # B. 动态与空间塑造
-            # ==========================================
-            # 5. 动态压摆：极快的 attack (2ms) 压住扫弦毛刺
+
+            # 5. 极快的 attack (2ms) 压住扫弦毛刺
             Compressor(threshold_db=-22.0, ratio=3.5, attack_ms=2.0, release_ms=150.0),
 
-            # 6. 大教堂混响 (Cathedral Reverb)：产生深邃的包裹感
+            # 6. 大教堂混响产生深邃的包裹感
             Reverb(room_size=1.0, damping=0.6, wet_level=0.45, dry_level=0.85)
         ])
 
